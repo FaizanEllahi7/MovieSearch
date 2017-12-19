@@ -25,7 +25,7 @@ extension AlamofireNetworkRequest{
     func request(request: URLRequestConvertible,completionHandler: @escaping (DataResponse<Any>) -> Void) {
         
         let manager = SessionManager.default
-        manager.request(request).responseJSON(completionHandler: completionHandler)
+        manager.request(request).validate().responseJSON(completionHandler: completionHandler)
         
     }
 }

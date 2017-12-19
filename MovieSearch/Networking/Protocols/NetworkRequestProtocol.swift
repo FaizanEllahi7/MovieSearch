@@ -31,7 +31,7 @@ extension NetworkRequestProtocol {
                 return
             }
             
-            if response.response?.statusCode == 200 {
+            if self.isValidatStatusCode(statusCode: response.response?.statusCode) {
                 
                 if let jsonResponse = response.data {
                     do {
@@ -51,6 +51,18 @@ extension NetworkRequestProtocol {
                 
                 completion(nil, APIError.responseUnsuccessful, false)
             }
+        }
+    }
+    
+    func isValidatStatusCode(statusCode: Int?) -> Bool {
+        
+        if (statusCode != nil && statusCode! > 200 && statusCode! < 300) {
+            
+            return true
+        }
+        else{
+            
+            return false
         }
     }
 }
