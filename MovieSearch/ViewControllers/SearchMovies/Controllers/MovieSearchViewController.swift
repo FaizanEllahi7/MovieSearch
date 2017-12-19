@@ -30,6 +30,19 @@ class MovieSearchViewController: UIViewController {
         movieTableView.estimatedRowHeight = 175
         movieTableView.rowHeight = UITableViewAutomaticDimension
         
+        //Seup Search controller
+        setupSearchController()
+        
+        //Listen for the updates from view model
+        listernForUpdates()
+    }
+    
+}
+//MARK:- Helper Methods
+extension MovieSearchViewController {
+    
+    func setupSearchController() {
+        
         // Setup the Search Controller
         resultsTableController = SearchResultsController()
         resultsTableController.delegate = self
@@ -51,13 +64,7 @@ class MovieSearchViewController: UIViewController {
             // For iOS 10 and earlier, we place the search bar in the table view's header.
             movieTableView.tableHeaderView = searchController.searchBar
         }
-        //Listen for the updates from view model
-        listernForUpdates()
     }
-    
-}
-//MARK:- Helper Methods
-extension MovieSearchViewController {
     
     func listernForUpdates() {
         
@@ -173,6 +180,7 @@ extension MovieSearchViewController: UISearchBarDelegate {
     }
 }
 
+//MARK:- SearchResultsController Delegate
 extension MovieSearchViewController: SearchResultsControllerDelegate {
     
     func selectedMovie(query: String, indexPath: IndexPath) {
@@ -217,6 +225,7 @@ extension MovieSearchViewController: UITableViewDelegate {
     }
 }
 
+//MARK:- UISearchController Delegate
 extension MovieSearchViewController: UISearchControllerDelegate {
     func presentSearchController(_ searchController: UISearchController) {
         
