@@ -42,7 +42,7 @@ class MovieSearchViewController: UIViewController {
 extension MovieSearchViewController {
     
     func setupSearchController() {
-        
+         
         // Setup the Search Controller
         resultsTableController = SearchResultsController()
         resultsTableController.delegate = self
@@ -87,6 +87,7 @@ extension MovieSearchViewController {
                 
             case .noResult(let error):
                 DispatchQueue.main.async {
+                    strongSelf.movieTableView.reloadData()
                     strongSelf.showAlert(message: error)
                 }
             }
@@ -163,14 +164,7 @@ extension MovieSearchViewController: UISearchBarDelegate {
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if searchText.count == 0 {
-            
-            showSearchResultController()
-        } else {
-            
-            hideSearchResultController()
-        }
-    }
+        showSearchResultController()
 }
 
 //MARK:- SearchResultsController Delegate
