@@ -56,7 +56,7 @@ extension NetworkRequestProtocol {
     
     func isValidatStatusCode(statusCode: Int?) -> Bool {
         
-        if (statusCode != nil && statusCode! > 200 && statusCode! < 300) {
+        if (statusCode != nil && statusCode! >= 200 && statusCode! < 300) {
             
             return true
         }
