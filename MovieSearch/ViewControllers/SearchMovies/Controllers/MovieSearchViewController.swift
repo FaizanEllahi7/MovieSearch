@@ -157,14 +157,7 @@ extension MovieSearchViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         
-        if searchBar.text?.count == 0 {
-            
-            showSearchResultController()
-        } else {
-            
-            hideSearchResultController()
-        }
-        
+        showSearchResultController()
         return true
     }
     
@@ -186,6 +179,7 @@ extension MovieSearchViewController: SearchResultsControllerDelegate {
     func selectedMovie(query: String, indexPath: IndexPath) {
         
         searchController.searchBar.text = query
+        searchController.searchBar.resignFirstResponder()
         movieViewModel.searchQuery(queryText: query)
         hideSearchResultController()
     }
