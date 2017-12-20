@@ -18,7 +18,6 @@ class SearchResultsController : UITableViewController {
     
     var searchHistory = [String]() {
         didSet{
-            //self.setTableViewHeight()
             self.tableView.reloadData()
         }
     }
@@ -30,12 +29,6 @@ class SearchResultsController : UITableViewController {
         super.viewDidLoad()
         
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: resultsTableViewCellIdentifier)
-    }
-    
-    func setTableViewHeight() {
-        
-        self.tableView.frame = CGRect(x: 0, y: 0, width: Int(UIScreen.main.bounds.width), height: searchHistory.count * 44)
-        self.view.frame = CGRect(x: 0, y: 0, width: Int(UIScreen.main.bounds.width), height: searchHistory.count * 44)
     }
     
     override func viewWillAppear(_ animated: Bool) {
