@@ -13,6 +13,7 @@ class MovieSearchViewModel: NSObject, QueryResult {
     //MARK:- Variables
     var searchResult: Dynamic<MovieSearchResult>
     var queryResult: MoviesDataRepresentation!
+    
     /**
      Storage is a container and any class that implement the PersistentRepresentable protocol can assign to it.
      */
@@ -60,31 +61,24 @@ extension MovieSearchViewModel {
         
         let params = SearchMovieParamerters(query: queryText, api_key: api_key, page: page)
         
-        do {
-            let urlRequest = try AlamofireRouterRequest.searchMovie(params).asURLRequest()
+        searchRequestManager.searchMoviesWith(with: .searchMovie(params)) {[weak self] (result) in
             
-            searchRequestManager.searchMoviesWith(with: urlRequest) {[weak self] (result) in
+            guard let strongSelf = self else { return }
+            
+            switch result {
                 
-                guard let strongSelf = self else { return }
-                
-                switch result {
+            case .success(let movieData):
+                if isFetchingNextPage {
                     
-                case .success(let movieData):
-                    if isFetchingNextPage {
-                        
-                        strongSelf.updateSearchResult(with: movieData as? Movies)
-                    } else {
-                        
-                        strongSelf.createSearchResult(from: movieData as? Movies, queryString: queryText)
-                    }
-                case .failure(let error):
-                    strongSelf.searchResult.value = .failure(error:error.localizedDescription)
+                    strongSelf.updateSearchResult(with: movieData as? Movies)
+                } else {
                     
+                    strongSelf.createSearchResult(from: movieData as? Movies, queryString: queryText)
                 }
+            case .failure(let error):
+                strongSelf.searchResult.value = .failure(error:error.localizedDescription)
+                
             }
-        }
-        catch {
-            searchResult.value = .failure(error: APIError.urlRequestnsuccessful.localizedDescription)
         }
     }
     
@@ -94,18 +88,13 @@ extension MovieSearchViewModel {
     func getMockQueryResult(completion: @escaping (_ result: Result?) -> Void) {
         
         let params = SearchMovieParamerters(query: "Batman", api_key: api_key, page: 1)
-        do {
-            let urlRequest = try AlamofireRouterRequest.searchMovie(params).asURLRequest()
+        
+        searchRequestManager.searchMoviesWith(with: .searchMovie(params)) {(result) in
             
-            searchRequestManager.searchMoviesWith(with: urlRequest) {(result) in
-                
-                return completion(result)
-            }
-        }
-        catch {
+            return completion(result)
             
-            return completion(nil)
         }
+        
     }
     
     //MARK:- Update Query Result

@@ -18,18 +18,24 @@ class MovieSearchRequest: NetworkRequestProtocol {
      - parameter request: Creates a DownloadRequest to retrieve the contents the specified url, method, parameters, encoding.
      - parameter completionHandler: Send back the Result enum either success of failure depending on the server reponse
      */
-    func searchMoviesWith(with request: URLRequestConvertible, completionHandler: @escaping (Result) -> Void){
+    func searchMoviesWith(with request: AlamofireRouterRequest, completionHandler: @escaping (Result) -> Void){
         
-        self.load(with: request) { (data : Movies?, error, success) in
-            
-            if success {
+        do {
+            try self.load(with: request.asURLRequest()) { (data : Movies?, error, success) in
                 
-                completionHandler(.success(data!))
-                
-            } else {
-                
-                completionHandler(.failure(error!))
+                if success {
+                    
+                    completionHandler(.success(data!))
+                    
+                } else {
+                    
+                    completionHandler(.failure(error!))
+                }
             }
+            
+        }
+        catch {
+            completionHandler(.failure(APIError.urlRequestUnsuccessful))
         }
     }
 }
