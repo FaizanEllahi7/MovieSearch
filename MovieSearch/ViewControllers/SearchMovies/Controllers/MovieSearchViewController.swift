@@ -164,7 +164,13 @@ extension MovieSearchViewController: UISearchBarDelegate {
     
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        showSearchResultController()
+        if searchText.count == 0 {
+            
+            hideSearchResultController()
+        } else {
+            
+            showSearchResultController()
+        }
     }
 }
 
