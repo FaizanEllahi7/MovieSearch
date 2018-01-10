@@ -14,7 +14,7 @@ enum APIError: Error {
     case jsonConversionFailure
     case invalidData
     case responseUnsuccessful
-    case urlRequestnsuccessful
+    case urlRequestUnsuccessful
     
     var localizedDescription: String {
         switch self {
@@ -22,7 +22,7 @@ enum APIError: Error {
         case .invalidData: return "Invalid Data"
         case .responseUnsuccessful: return "Response Unsuccessful"
         case .jsonConversionFailure: return "JSON Conversion Failure"
-        case .urlRequestnsuccessful: return "Error in request paramerts"
+        case .urlRequestUnsuccessful: return "Error in request paramerts"
         }
     }
 }
