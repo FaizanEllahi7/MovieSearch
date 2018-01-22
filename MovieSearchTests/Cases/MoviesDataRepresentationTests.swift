@@ -33,7 +33,7 @@ class MoviesDataRepresentationTests: XCTestCase {
         XCTAssertEqual(moviesRepresentation.movies.first!.movieDate, "1989-06-23")
         XCTAssertEqual(moviesRepresentation.movies.first!.movieName, "Batman")
         XCTAssertEqual(moviesRepresentation.movies.first!.movieOverview, "The Dark Knight of Gotham City begins his war on crime with his first major enemy being the clownishly homicidal Joker, who has seized control of Gotham's underworld.")
-        XCTAssertEqual(moviesRepresentation.movies.first!.moviePoster, "/kBf3g9crrADGMc2AMAMlLBgSm2h.jpg")
+        XCTAssertEqual(moviesRepresentation.movies.first!.moviePoster, imageURL + "/kBf3g9crrADGMc2AMAMlLBgSm2h.jpg")
     }
     
     func testupdateMoviesData() {
