@@ -15,7 +15,8 @@ platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
     build_app(scheme: "MovieSearch")
-    upload_to_testflight
+    crashlytics(api_token: "34825100e96323365d3bd98baa92c47125b61281",
+              build_secret: "9bb92196a08d3fbf4c36b695e18fdb05ccfa0d28fe29fe3785be5c9d43819af6")
   end
 end
 
