@@ -72,6 +72,7 @@ enum AlamofireRouterRequest: URLRequestConvertible, RequestProtocol {
                 
             case .searchMovie(let params):
                 let body = try JSONEncoder().encode(params)
+                try JSONSerialization.jsonObject(with: body, options: []) as? [String: Any]
                 return body
             }
         }
