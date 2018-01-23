@@ -16,7 +16,9 @@ platform :ios do
   lane :beta do
     build_app(scheme: "MovieSearch")
     crashlytics(api_token: "34825100e96323365d3bd98baa92c47125b61281",
-              build_secret: "9bb92196a08d3fbf4c36b695e18fdb05ccfa0d28fe29fe3785be5c9d43819af6")
+              build_secret: "9bb92196a08d3fbf4c36b695e18fdb05ccfa0d28fe29fe3785be5c9d43819af6",
+notes: "This is a testing of Fastlane",
+emails: "faizan.ellahi@venturedive.com, faizanellahi07@gmail.com")
   end
 end
 
