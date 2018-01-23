@@ -1,0 +1,8 @@
+app_identifier "com.FNVTech.test" # The bundle identifier of your app
+apple_id "engr.rahmed@gmail.com" # Your Apple email address
+
+itc_team_id "117812420" # iTunes Connect Team ID
+team_id "PU6P7DJC32" # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
